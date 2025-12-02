@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace Dag1
+﻿namespace Dag1
 {
     internal class Program
 
