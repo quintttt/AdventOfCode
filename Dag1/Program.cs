@@ -9,39 +9,37 @@ namespace Dag1
         {
             if (inputRotation.Contains("R"))
             {
-                Console.Write("Rechts - ");
                 int inputRotationInt = int.Parse(inputRotation.Substring(1));
                 if (inputRotationInt>100) 
                 {
                     inputRotationInt %= 100;
                 }
-                return clamp1(currentPosition += inputRotationInt);
+                return clampRotation(currentPosition += inputRotationInt);
                 
             }
             else
             {
-                Console.Write("Links - ");
                 int inputRotationInt = int.Parse(inputRotation.Substring(1));
                 if (inputRotationInt>-100)
                 {
                     inputRotationInt %=100;
                 }
-                return clamp1(currentPosition -= inputRotationInt);
+                return clampRotation(currentPosition -= inputRotationInt);
             }
         }
 
 
-        static int clamp1(int input)
+        static int clampRotation(int inputRotationInt)
         {
-            if (input>99)
+            if (inputRotationInt>99)
             {
-                return input-100;
+                return inputRotationInt-100;
             }
-            else if (input<0)
+            else if (inputRotationInt<0)
             {
-                return 100 + input;   
+                return 100 + inputRotationInt;   
             }
-            else return input;
+            else return inputRotationInt;
         }
 
         static void Main(string[] args)
@@ -55,11 +53,10 @@ namespace Dag1
             for (int i=0; i<(inputRotation.Length-1); i++)
             {
                 currentPosition = Rotation(inputRotation[i], currentPosition);
-                Console.WriteLine(currentPosition);
                 if (currentPosition==0){zeroCount++;}
             }
 
-            Console.WriteLine(zeroCount);
+            Console.WriteLine($"Aantal nullen: {zeroCount}");
         }
     }
 }
