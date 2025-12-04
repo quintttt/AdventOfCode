@@ -5,25 +5,25 @@
         static void Main(string[] args)
         {
             string readFromFile = File.ReadAllText("/home/quinn/Documents/Visual Studio Code/AdventOfCode/Dag3/input.txt");
-            string[] inputJoltage = readFromFile.Split("\n");
+            string[] inputJoltage = readFromFile.Trim().Split("\n");
 
             int outputTotalJoltage = 0;
             int stringLength = inputJoltage[0].Length - 1;
 
-            for (int i = 0; i < inputJoltage.Length - 1; i++)
+            foreach (string inputString in inputJoltage)
             {
-                char highestNumber = char.Parse(inputJoltage[i].Max().ToString());
-                int numberLocation = inputJoltage[i].IndexOf(highestNumber);
+                char highestNumber = char.Parse(inputString.Max().ToString());
+                int numberLocation = inputString.IndexOf(highestNumber);
                 if (numberLocation < stringLength)
                 {
-                    char secondHighestNumber = char.Parse(inputJoltage[i].Substring(numberLocation + 1).Max().ToString());
+                    char secondHighestNumber = char.Parse(inputString.Substring(numberLocation + 1).Max().ToString());
                     int outputJoltage = Convert.ToInt32(string.Format("{0}{1}", highestNumber, secondHighestNumber));
                     outputTotalJoltage += outputJoltage;
                 }
                 else
                 {
-                    char highestNumber2 = char.Parse(inputJoltage[i][..stringLength].Max().ToString());
-                    char secondHighestNumber = char.Parse(inputJoltage[i][numberLocation..].Max().ToString());
+                    char highestNumber2 = char.Parse(inputString[..stringLength].Max().ToString());
+                    char secondHighestNumber = char.Parse(inputString[numberLocation..].Max().ToString());
                     int outputJoltage = Convert.ToInt32(string.Format("{0}{1}", highestNumber2, secondHighestNumber));
                     outputTotalJoltage += outputJoltage;
                 }
