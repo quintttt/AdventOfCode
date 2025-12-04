@@ -5,21 +5,23 @@
     {
         static int Rotation(string inputRotation, int currentPosition)
         {
-            int inputRotationInt = int.Parse(inputRotation.Substring(1));
-            if (inputRotation.Contains("R"))
+            int inputRotationInt = int.Parse(inputRotation[1..]);
+            char rotationDirection = inputRotation[0];
+            switch (rotationDirection)
             {
-                if (inputRotationInt > 100) { inputRotationInt %= 100; }
-                return clampRotation(currentPosition += inputRotationInt);
-
-            }
-            else
-            {
-                if (inputRotationInt > -100) { inputRotationInt %= 100; }
-                return clampRotation(currentPosition -= inputRotationInt);
+                case 'R':
+                    if (inputRotationInt > 100) { inputRotationInt %= 100; }
+                    return ClampRotation(currentPosition += inputRotationInt);
+                case 'L':
+                    if (inputRotationInt > -100) { inputRotationInt %= 100; }
+                    return ClampRotation(currentPosition -= inputRotationInt);
+                default:
+                    Console.WriteLine($"{inputRotation} - Geen geldige richting aangegeven.");
+                    return 1;
             }
         }
 
-        static int clampRotation(int inputRotationInt)
+        static int ClampRotation(int inputRotationInt)
         {
             if (inputRotationInt > 99) { return inputRotationInt - 100; }
             else if (inputRotationInt < 0) { return 100 + inputRotationInt; }
@@ -29,13 +31,14 @@
         static void Main(string[] args)
         {
             string readFile = File.ReadAllText("/home/quinn/Documents/Visual Studio Code/AdventOfCode/Dag1/input.txt");
-            string[] inputRotation = readFile.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            string[] inputRotation = readFile.Trim().Split("\n");
+
             int currentPosition = 50;
             int zeroCount = 0;
 
-            for (int i = 0; i < (inputRotation.Length - 1); i++)
+            foreach (string inputRotationString in inputRotation)
             {
-                currentPosition = Rotation(inputRotation[i], currentPosition);
+                currentPosition = Rotation(inputRotationString, currentPosition);
                 if (currentPosition == 0) { zeroCount++; }
             }
 

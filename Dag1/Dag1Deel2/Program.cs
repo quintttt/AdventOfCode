@@ -3,12 +3,11 @@
     internal class Program
 
     {
-
         static int clickCount = 0;
         static int Rotation(string inputRotation, int currentPosition)
         {
-            int inputRotationInt = int.Parse(inputRotation.Substring(1));
-            if (inputRotation.Contains("R"))
+            int inputRotationInt = int.Parse(inputRotation[1..]);
+            if (inputRotation.Contains('R'))
             {
 
                 if (inputRotationInt > 100)
@@ -16,7 +15,7 @@
                     clickCount += (inputRotationInt - (inputRotationInt % 100)) / 100;
                     inputRotationInt %= 100;
                 }
-                return clampRotation(currentPosition += inputRotationInt);
+                return ClampRotation(currentPosition += inputRotationInt);
 
             }
             else
@@ -26,22 +25,18 @@
                     clickCount += (inputRotationInt - (inputRotationInt % 100)) / 100;
                     inputRotationInt %= 100;
                 }
-                return clampRotation(currentPosition -= inputRotationInt);
+                return ClampRotation(currentPosition -= inputRotationInt);
             }
         }
 
 
-        static int clampRotation(int inputRotationInt)
+        static int ClampRotation(int inputRotationInt)
         {
-            if (inputRotationInt > 99)
+            if (inputRotationInt > 99 || inputRotationInt < 0)
             {
                 clickCount++;
-                return inputRotationInt - 100;
-            }
-            else if (inputRotationInt < 0)
-            {
-                clickCount++;
-                return 100 + inputRotationInt;
+                if (inputRotationInt > 99) { return inputRotationInt - 100; }
+                else { return 100 + inputRotationInt; }
             }
             else return inputRotationInt;
         }
@@ -49,13 +44,14 @@
         static void Main(string[] args)
         {
             string readFile = File.ReadAllText("/home/quinn/Documents/Visual Studio Code/AdventOfCode/Dag1/input.txt");
-            string[] inputRotation = readFile.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            string[] inputRotation = readFile.Trim().Split("\n");
+
             int currentPosition = 50;
             int zeroCount = 0;
 
-            for (int i = 0; i < (inputRotation.Length - 1); i++)
+            foreach (string inputRotationString in inputRotation)
             {
-                currentPosition = Rotation(inputRotation[i], currentPosition);
+                currentPosition = Rotation(inputRotationString, currentPosition);
                 if (currentPosition == 0) { zeroCount++; }
             }
 
