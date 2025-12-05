@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Dag5
+﻿namespace Dag5
 {
     internal class Program
     {
@@ -21,11 +19,6 @@ namespace Dag5
             ulong[] idulongarr;
             idulongarr = Array.ConvertAll(idstring, ulong.Parse);
 
-            foreach (ulong idulong in idulongarr)
-            {
-                Console.WriteLine(idulong);
-            }
-
             Array.Sort(idRangelist);
             bool isspoiled = false;
             foreach (ulong idulong in idulongarr)
@@ -44,74 +37,13 @@ namespace Dag5
                             verscounter++;
                             isspoiled = false;
                         }
-                        
+
                     }
                 }
 
             }
 
             Console.WriteLine(verscounter);
-            /*foreach (string idRange in idRangelist)
-            {
-                string[] idRangestartend = idRange.Split('-');
-                ulong stringLength = ulong.Parse(idRangestartend[1]) - ulong.Parse(idRangestartend[0]);
-                Console.WriteLine(stringLength);
-                /*
-                for (long idCompare = long.Parse(idRangestartend[0]); idCompare <= long.Parse(idRangestartend[1]); idCompare++)
-                {
-                    string idCompareString = idCompare.ToString();
-                    if (idCompareString == id)
-                    {
-                        Console.WriteLine("vers");
-                    }
-                }*/
-
-            /*foreach (string idRange in idRangelist)
-            {
-                string[] idRangestartend = idRange.Split('-');
-                for (long idCompare = long.Parse(idRangestartend[0]); idCompare <= long.Parse(idRangestartend[1]); idCompare++)
-                {
-                    string idCompareString = idCompare.ToString();
-                    if (idCompareString == id)
-                    {
-                        Console.WriteLine("vers");
-                    }
-                }
-            } */
-
-            /*foreach (string inputIdString in idRangelist)
-            {
-                Console.WriteLine(inputIdString);
-            }*/
-
-            /*foreach (string idRange in idRangelist)
-            {
-                string[] idRangecompare = idRange.Split('-');
-                if (idRangecompare[0] == idRangecompare[1])
-                {
-                    Console.WriteLine(idRange);
-                }
-            }*/
-
-
-
-            /*foreach (string id in idstring)
-            {
-                foreach (string idRange in idRangelist)
-                {
-                    string[] idRangecompare = idRange.Split('-');
-                    for (int idCompare = int.Parse(idRangecompare[0]); idCompare <= int.Parse(idRangecompare[1]); idCompare++)
-                    {
-                        string idCompareString = idCompare.ToString();
-                        if (idCompareString == id)
-                        {
-                            Console.WriteLine("vers");
-                        }
-                    }
-                }
-
-            }*/
-
         }
     }
 }
