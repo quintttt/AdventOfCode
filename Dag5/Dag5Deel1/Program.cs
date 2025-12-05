@@ -5,42 +5,35 @@
         static void Main(string[] args)
         {
             string readFromFile = File.ReadAllText("/home/quinn/Documents/Visual Studio Code/AdventOfCode/Dag5/input.txt");
-            string[] inputIDfile = readFromFile.Split("\n");
-            string[] idRangelist;
-            idRangelist = new string[167];
-            string[] idstring;
-            idstring = new string[1000];
+            string[] inputIdFile = readFromFile.Split("\n");
 
-            int verscounter = 0;
+            int arraySplitLocation = 0;
+            while (inputIdFile[arraySplitLocation] != "") { arraySplitLocation++; }
+            int arrayStringLength = inputIdFile.Length - arraySplitLocation - 2;
 
-            Array.Copy(inputIDfile, idRangelist, 167);
-            Array.Copy(inputIDfile, 168, idstring, 0, 1000);
+            string[] idRangeArray = new string[arraySplitLocation];
+            string[] idStringArray = new string[arrayStringLength];
 
-            ulong[] idulongarr;
-            idulongarr = Array.ConvertAll(idstring, ulong.Parse);
+            Array.Copy(inputIdFile, idRangeArray, arraySplitLocation);
+            Array.Copy(inputIdFile, arraySplitLocation + 1, idStringArray, 0, arrayStringLength);
 
-            Array.Sort(idRangelist);
-            bool isspoiled = false;
-            foreach (ulong idulong in idulongarr)
+            int freshCounter = 0;
+            bool isSpoiled;
+
+            foreach (string id in idStringArray)
             {
-                isspoiled = true;
-                foreach (string idRange in idRangelist)
+                isSpoiled = true;
+                foreach (string idRange in idRangeArray)
                 {
-                    string[] idRangestartend = idRange.Split('-');
-                    ulong[] idRangeStartend = Array.ConvertAll(idRangestartend, ulong.Parse);
-
-                    if (idulong >= idRangeStartend[0] && idulong <= idRangeStartend[1])
+                    string[] idRangeSplit = idRange.Split('-');
+                    if (ulong.Parse(id) >= ulong.Parse(idRangeSplit[0]) && ulong.Parse(id) <= ulong.Parse(idRangeSplit[1]))
                     {
-                        Console.WriteLine($"{idulong} is tussen {idRangeStartend[0]} en {idRangeStartend[1]}: VERS");
-                        if (isspoiled == true)
-                        {
-                            verscounter++;
-                            isspoiled = false;
-                        }
+                        if (isSpoiled == true) { freshCounter++; }
+                        isSpoiled = false;
                     }
                 }
             }
-            Console.WriteLine(verscounter);
+            Console.WriteLine($"{freshCounter} producten zijn nog vers.");
         }
     }
 }
