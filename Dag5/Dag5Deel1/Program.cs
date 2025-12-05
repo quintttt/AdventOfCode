@@ -37,12 +37,9 @@
                             verscounter++;
                             isspoiled = false;
                         }
-
                     }
                 }
-
             }
-
             Console.WriteLine(verscounter);
         }
     }
