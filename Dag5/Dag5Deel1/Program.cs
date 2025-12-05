@@ -1,15 +1,18 @@
-﻿namespace Dag5
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
+
+namespace Dag5
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             string readFromFile = File.ReadAllText("/home/quinn/Documents/Visual Studio Code/AdventOfCode/Dag5/input.txt");
-            string[] inputIdFile = readFromFile.Split("\n");
+            string[] inputIdFile = readFromFile.Trim().Split("\n");
 
             int arraySplitLocation = 0;
-            while (inputIdFile[arraySplitLocation] != "") { arraySplitLocation++; }
-            int arrayStringLength = inputIdFile.Length - arraySplitLocation - 2;
+            while (Regex.IsMatch(inputIdFile[arraySplitLocation], "-")) { arraySplitLocation++; }
+            int arrayStringLength = inputIdFile.Length - arraySplitLocation - 1;
 
             string[] idRangeArray = new string[arraySplitLocation];
             string[] idStringArray = new string[arrayStringLength];
