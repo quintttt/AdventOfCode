@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-namespace Dag6
+﻿namespace Dag6
 {
     internal class Program
     {
