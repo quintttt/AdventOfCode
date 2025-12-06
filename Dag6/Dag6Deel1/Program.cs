@@ -30,24 +30,6 @@ namespace Dag6
                 }
             }
             Console.WriteLine(count);
-
-            /*foreach (string mathNumber in mathNumberArray0)
-            {
-                Console.WriteLine(mathNumber);
-            }
-            foreach (string mathNumber in mathNumberArray1)
-            {
-                Console.WriteLine(mathNumber);
-            }
-            foreach (string mathNumber in mathNumberArray2)
-            {
-                Console.WriteLine(mathNumber);
-            }
-            foreach (string mathNumber in mathNumberArray3)
-            {
-                Console.Write(mathNumber + ' ');
-            }*/
-
         }
     }
 }
