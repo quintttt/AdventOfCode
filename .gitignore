@@ -3,6 +3,7 @@ obj*
 *.csproj
 *.sln
 Dag4*
-Dag5/Dag5Deel2/Program.cs
-Dag6/inputtest.txt
-Dag6/Dag6Deel2/Program.cs
+Dag5/Dag5Deel2*
+inputtest*
+Dag6/Dag6Deel2*
+Dag7*
